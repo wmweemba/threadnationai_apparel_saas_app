@@ -34,12 +34,12 @@ export function CaptionPanel({ socialContent }: CaptionPanelProps) {
   const tabs = [
     {
       id: "sales",
-      label: "The Hustler",
+      label: "Hustler",
       caption: socialContent.sales_caption,
     },
     {
       id: "lifestyle",
-      label: "The Storyteller",
+      label: "Storyteller",
       caption: socialContent.lifestyle_caption,
     },
     {
@@ -58,7 +58,7 @@ export function CaptionPanel({ socialContent }: CaptionPanelProps) {
       </h3>
 
       <Tabs defaultValue="sales">
-        <TabsList className="bg-surface-elevated border border-border rounded-btn p-1 w-full grid grid-cols-3">
+        <TabsList className="bg-surface-elevated border border-border rounded-btn p-1 w-full grid grid-cols-3 overflow-hidden">
           {tabs.map((tab) => (
             <TabsTrigger
               key={tab.id}

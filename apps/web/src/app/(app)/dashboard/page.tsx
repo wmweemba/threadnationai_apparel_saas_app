@@ -136,7 +136,7 @@ export default function DashboardPage() {
               />
             )}
             <StyleSelector
-              qualityScore={100}
+              qualityScore={result?.inputQualityScore ?? 100}
               selected={selectedPreset}
               onSelect={(preset: StylePreset) => setSelectedPreset(preset)}
               onGenerate={handleGenerate}

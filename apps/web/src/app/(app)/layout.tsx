@@ -19,7 +19,7 @@ export default async function AppLayout({
       <nav className="border-b border-border bg-surface-card">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/dashboard">
-            <span className="font-syne font-bold text-xl text-text-primary">
+            <span className="font-syne font-bold text-xl text-text-primary whitespace-nowrap">
               ThreadNation <span className="text-accent">AI</span>
             </span>
           </Link>
