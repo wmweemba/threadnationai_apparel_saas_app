@@ -13,6 +13,7 @@ import { CaptionPanel } from "@/components/caption-panel";
 import { ResultHub } from "@/components/result-hub";
 import { MockTopupModal } from "@/components/mock-topup-modal";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/hooks/use-toast";
 import type { StylePreset } from "@threadnation/shared";
 
 export default function DashboardPage() {
@@ -44,6 +45,7 @@ export default function DashboardPage() {
   } = useCredits();
 
   const [topupOpen, setTopupOpen] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (searchParams.get("r") === "1") {
@@ -60,6 +62,7 @@ export default function DashboardPage() {
   const handleReject = async () => {
     await reject();
     refetchCredits();
+    toast({ title: "0.5 credits refunded", description: "Pick a different style and try again." });
   };
 
   const handleGenerate = () => {

@@ -202,13 +202,18 @@ export function useGeneration() {
         {},
         token
       );
-      reset();
+      // Return to style_select — user picks a different preset with the same photo
+      setSelectedPreset(null);
+      setProgress(null);
+      setHighResUrl(null);
+      setError(null);
+      setPhase("style_select");
       return data;
     } catch (err) {
       setError((err as Error).message);
       throw err;
     }
-  }, [result, getToken, reset]);
+  }, [result, getToken]);
 
   return {
     phase,
