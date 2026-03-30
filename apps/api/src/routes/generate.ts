@@ -8,7 +8,7 @@ import { analyzeImageQuality } from "../agents/quality-critic";
 import { generateCaptions } from "../agents/caption-agent";
 import { generateImage } from "../services/fal-service";
 import { createWatermarkedPreview } from "../services/watermark-service";
-import { uploadBuffer, uploadFromUrl } from "../services/storage-service";
+import { uploadBuffer } from "../services/storage-service";
 import { Generation } from "../models/generation.model";
 import { User } from "../models/user.model";
 import {
@@ -155,23 +155,20 @@ async function runPipeline(
 
     const garmentDescription = quality.garment_description;
 
-    // Step 3 — Placing model in setting
+    // Step 3 — Placing model in setting (HuggingFace generation happens here)
     emitProgress(job, PROGRESS_STEPS[2]);
-    const { imageUrl, modelUsed } = await generateImage(garmentDescription, stylePreset);
+    const { imageBuffer: generatedBuffer, modelUsed } = await generateImage(
+      garmentDescription,
+      stylePreset
+    );
 
-    // Step 4 — Generating studio image (fetch + watermark + upload)
+    // Step 4 — Watermark + upload (buffer already in memory from HF)
     emitProgress(job, PROGRESS_STEPS[3]);
 
-    const falResponse = await fetch(imageUrl);
-    if (!falResponse.ok) {
-      throw new Error(`Failed to fetch Fal image: ${falResponse.status}`);
-    }
-    const falBuffer = Buffer.from(await falResponse.arrayBuffer());
-
-    const watermarkedBuffer = await createWatermarkedPreview(falBuffer);
+    const watermarkedBuffer = await createWatermarkedPreview(generatedBuffer);
     const [previewUrl, highResUrl] = await Promise.all([
       uploadBuffer(watermarkedBuffer, "threadnation/previews", `${jobId}_preview`),
-      uploadFromUrl(imageUrl, "threadnation/highres", `${jobId}_highres`),
+      uploadBuffer(generatedBuffer, "threadnation/highres", `${jobId}_highres`),
     ]);
 
     // Step 5 — Captions
@@ -211,7 +208,7 @@ async function runPipeline(
       },
     });
   } catch (err) {
-    console.error("[pipeline] error for job", jobId, (err as Error).message);
+    console.error("[pipeline] error for job", jobId, err);
 
     // Attempt to persist failure record (best-effort)
     try {

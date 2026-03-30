@@ -11,6 +11,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] — 2026-03-30
+
+### Added
+
+#### Frontend — Components (`apps/web/src/components/`)
+- `consent-gate.tsx` — DPA consent modal (Zambia Data Protection Act 2021):
+  - Full-screen overlay on first login when `dpaConsentSigned === false`
+  - Plain-language data processing disclosure (international processing, 24h deletion, no AI training)
+  - Calls `PATCH /api/v1/credits/consent` on accept; dismisses and unblocks dashboard
+- `upload-zone.tsx` — mobile-first PWA image upload:
+  - Two hidden `<input>` refs: camera (`capture="environment"`) and gallery (no capture)
+  - Prominent "Take a Photo" and "Choose from Gallery" buttons for mobile
+  - Desktop drag-and-drop zone (`hidden sm:flex`)
+  - Preview state with "Tap to change" hover overlay
+  - Resets `input.value` after selection so same file can be reselected
+- `style-selector.tsx` — three preset cards (Studio Clean, Lusaka Lifestyle, Garden Shoot) with selection highlight
+- `progress-feed.tsx` — animated SSE progress steps:
+  - Live elapsed-second counter next to the active step
+  - `SLOW_STEPS = {3, 4}` — after 15s shows "AI is working hard on your image..." with pulse animation
+  - Time estimate updated to "~45–90 seconds · Please keep this tab open"
+- `preview-card.tsx` — displays watermarked 512px preview image with "Unlock Full Resolution" and "Not quite right" (reject) buttons
+- `caption-panel.tsx` — tabbed panel for three caption variants with one-click copy
+- `result-hub.tsx` — post-approve export screen: high-res image, caption copy, WhatsApp share, "Generate Another" CTA
+- `credit-badge.tsx` — gold coin credit counter in the navbar
+- `mock-topup-modal.tsx` — demo credit top-up modal; adds 5 credits instantly with "(Demo Mode)" label for judges
+- `nav-actions.tsx` — navbar right-side slot combining `CreditBadge` and Clerk `UserButton`
+
+#### Frontend — Hooks (`apps/web/src/hooks/`)
+- `use-generation.ts` — full dashboard state machine managing 6 states: `idle → quality_check → style_select / quality_rejected → generating → preview → result`; consumes SSE stream via `EventSource`
+- `use-credits.ts` — credit balance fetch + mock topup action
+
+#### Frontend — Pages
+- `dashboard/page.tsx` — wired to `useGeneration` hook; renders correct component per state with DPA gate check
+- `history/page.tsx` — fetches and renders last 5 generations
+- `(app)/layout.tsx` — protected layout with navbar, `CreditBadge`, `UserButton`, and `ConsentGate`
+
+### Changed
+- `apps/api/src/services/fal-service.ts` — switched image generation provider from fal.ai (paid, credits exhausted) to **HuggingFace Inference API** (free tier):
+  - Model: `black-forest-labs/FLUX.1-schnell`
+  - Endpoint: `https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell` (migrated from deprecated `api-inference.huggingface.co`)
+  - Returns binary image buffer directly (no separate fetch step needed)
+  - `x-wait-for-model: "true"` header avoids cold-start 503s
+  - 503 retry logic with `estimated_time` back-off; up to 3 attempts with 5s delay between failures
+  - 2-minute timeout per attempt
+- `apps/api/src/routes/generate.ts` — updated pipeline to accept `imageBuffer` (not URL) from HuggingFace; removed `uploadFromUrl` call; both preview and high-res now use `uploadBuffer`
+- `apps/api/src/lib/env.ts` — added `HUGGINGFACE_API_KEY` required field; `FAL_KEY` made optional (kept for future provider switch)
+- `apps/api/.env` — added `HUGGINGFACE_API_KEY`; corrected `CLOUDINARY_CLOUD_NAME` to actual account cloud name
+
+### Fixed
+- `apps/api/src/middleware/auth.ts` — replaced `@clerk/express` `clerkMiddleware` auth context (silently returning null `userId`) with direct `verifyToken` from `@clerk/backend`; this was causing 401 on all protected routes despite valid tokens
+- `apps/api/src/models/user.model.ts` — changed `email` field from `required: true` to `default: ""` to allow auto-creation of user records from Clerk JWT (no email in token payload)
+- Pipeline error logging improved: full error object logged (not just `.message`) to surface Cloudinary and upstream API failures
+
+---
+
 ## [0.2.0] — 2026-03-29
 
 ### Added
@@ -145,6 +200,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/releases/tag/v0.1.0

@@ -22,7 +22,8 @@ const envSchema = z.object({
       message: "CLERK_PUBLISHABLE_KEY must start with pk_",
     }),
   OPENROUTER_API_KEY: z.string().min(1, "OPENROUTER_API_KEY is required"),
-  FAL_KEY: z.string().min(1, "FAL_KEY is required"),
+  HUGGINGFACE_API_KEY: z.string().min(1, "HUGGINGFACE_API_KEY is required"),
+  FAL_KEY: z.string().optional(), // kept for future switch back to fal.ai
   CLOUDINARY_CLOUD_NAME: z
     .string()
     .min(1, "CLOUDINARY_CLOUD_NAME is required"),

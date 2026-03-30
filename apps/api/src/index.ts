@@ -28,7 +28,14 @@ app.use(
 
 app.use(
   cors({
-    origin: env.FRONTEND_URL,
+    origin: (origin, callback) => {
+      // Allow requests with no origin (curl, Postman) and localhost in dev
+      if (!origin || origin === env.FRONTEND_URL) return callback(null, true);
+      if (env.NODE_ENV === "development" && /^http:\/\/localhost:\d+$/.test(origin)) {
+        return callback(null, true);
+      }
+      callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
