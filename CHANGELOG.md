@@ -11,6 +11,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.4.0] — 2026-03-30
+
+### Added
+- `apps/web/Dockerfile` — Next.js standalone Docker build for Coolify deployment; bakes `NEXT_PUBLIC_*` vars at build time via `ARG`
+- `apps/web/src/app/(app)/error.tsx` — Next.js App Router error boundary for the `(app)` route group; prevents full-page crashes, shows "Try again" button
+
+### Changed
+- `apps/web/src/app/layout.tsx` — Added `<Toaster />` to root layout; toasts from `result-hub.tsx` were silently dropped because the provider was never mounted
+- `apps/web/next.config.mjs` — Added `output: "standalone"` for Docker; removed `fal.media` and `*.fal.ai` image hostname patterns (no longer used — HuggingFace returns buffers, not URLs)
+- `apps/web/src/components/caption-panel.tsx` — Shortened tab labels ("The Hustler" → "Hustler", "The Storyteller" → "Storyteller") and added `overflow-hidden` to prevent overflow at 375px
+- `apps/web/src/app/(app)/layout.tsx` — Added `whitespace-nowrap` to nav brand text to prevent wrapping on small screens
+- `apps/api/Dockerfile` — Full rewrite fixing 4 bugs: (1) add `packages/shared/package.json` copy before `npm ci` so workspace resolution works, (2) add `python3 make g++ vips-dev` build tools to builder stage for sharp, (3) move `vips` (runtime only, not `-dev`) to runner stage, (4) fix runner to use workspace-aware `npm ci --omit=dev` with root lockfile
+
+### Fixed
+- `apps/web/src/app/(app)/dashboard/page.tsx` — `qualityScore` prop was hardcoded as `100`; now reads `result?.inputQualityScore ?? 100` from the quality critic response
+
+---
+
 ## [0.3.0] — 2026-03-30
 
 ### Added
@@ -200,7 +218,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/releases/tag/v0.1.0
