@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useGeneration } from "@/hooks/use-generation";
 import { useCredits } from "@/hooks/use-credits";
 import { ConsentGate } from "@/components/consent-gate";
@@ -15,6 +16,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { StylePreset } from "@threadnation/shared";
 
 export default function DashboardPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const {
     phase,
     uploadedFile,
@@ -40,6 +44,13 @@ export default function DashboardPage() {
   } = useCredits();
 
   const [topupOpen, setTopupOpen] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get("r") === "1") {
+      reset();
+      router.replace("/dashboard");
+    }
+  }, [searchParams]);
 
   const handleApprove = async () => {
     await approve();

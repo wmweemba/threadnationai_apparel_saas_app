@@ -1,0 +1,23 @@
+{
+  "name": "ThreadNation AI",
+  "short_name": "ThreadNation",
+  "description": "Studio photos in 60 seconds for Zambian fashion boutiques.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D0D0D",
+  "theme_color": "#C9A84C",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

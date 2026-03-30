@@ -19,44 +19,43 @@ export function ResultHub({
   onGenerateAnother,
 }: ResultHubProps) {
   const { toast } = useToast();
-  const [saving, setSaving] = useState(false);
+  const [sharing, setSharing] = useState(false);
 
-  const shareToWhatsApp = () => {
+  const shareToWhatsApp = async () => {
     const caption =
       socialContent.local_vibe_caption +
       "\n\n" +
       socialContent.hashtags.join(" ");
-    const text = encodeURIComponent(caption);
-    window.open(`https://wa.me/?text=${text}`, "_blank");
-    toast({
-      title: "WhatsApp opened",
-      description: "Attach your saved image in the WhatsApp chat.",
-    });
-  };
-
-  const saveToGallery = async () => {
-    setSaving(true);
+    setSharing(true);
     try {
-      if (navigator.share) {
-        const res = await fetch(highResUrl);
-        const blob = await res.blob();
-        const file = new File([blob], `threadnation-${Date.now()}.jpg`, {
-          type: "image/jpeg",
-        });
-        await navigator.share({ files: [file], title: "ThreadNation AI" });
+      const res = await fetch(highResUrl);
+      const blob = await res.blob();
+      const file = new File([blob], `threadnation-${Date.now()}.jpg`, {
+        type: "image/jpeg",
+      });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        // Mobile: native share sheet — user picks WhatsApp, gets image + text together
+        await navigator.share({ files: [file], text: caption, title: "ThreadNation AI" });
       } else {
+        // Desktop: download image then open WhatsApp Web with text
         const a = document.createElement("a");
-        a.href = highResUrl;
-        a.download = `threadnation-${Date.now()}.jpg`;
-        a.target = "_blank";
+        a.href = URL.createObjectURL(blob);
+        a.download = file.name;
         a.click();
+        const encoded = encodeURIComponent(caption);
+        window.open(`https://wa.me/?text=${encoded}`, "_blank");
+        toast({
+          title: "Image downloaded",
+          description: "Attach the saved image in your WhatsApp chat.",
+        });
       }
     } catch (err) {
       if ((err as Error).name !== "AbortError") {
-        toast({ title: "Download failed", variant: "destructive" });
+        toast({ title: "Share failed", variant: "destructive" });
       }
     } finally {
-      setSaving(false);
+      setSharing(false);
     }
   };
 
@@ -78,22 +77,13 @@ export function ResultHub({
       </div>
 
       {/* Actions */}
-      <div className="grid grid-cols-2 gap-3">
-        <Button
-          onClick={saveToGallery}
-          disabled={saving}
-          variant="outline"
-          className="border-border text-text-primary hover:border-accent rounded-btn h-11"
-        >
-          {saving ? "Saving..." : "Save to Gallery"}
-        </Button>
-        <Button
-          onClick={shareToWhatsApp}
-          className="bg-[#25D366] hover:bg-[#1eb854] text-white font-syne font-semibold rounded-btn h-11"
-        >
-          Share to WhatsApp 📲
-        </Button>
-      </div>
+      <Button
+        onClick={shareToWhatsApp}
+        disabled={sharing}
+        className="w-full bg-[#25D366] hover:bg-[#1eb854] text-white font-syne font-semibold rounded-btn h-11"
+      >
+        {sharing ? "Preparing..." : "Share to WhatsApp 📲"}
+      </Button>
 
       {/* Captions */}
       <CaptionPanel socialContent={socialContent} />
