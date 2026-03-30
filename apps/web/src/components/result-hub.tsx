@@ -35,10 +35,8 @@ export function ResultHub({
       });
 
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        // Mobile: native share sheet — user picks WhatsApp, gets image + text together
         await navigator.share({ files: [file], text: caption, title: "ThreadNation AI" });
       } else {
-        // Desktop: download image then open WhatsApp Web with text
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
         a.download = file.name;
@@ -80,7 +78,7 @@ export function ResultHub({
       <Button
         onClick={shareToWhatsApp}
         disabled={sharing}
-        className="w-full bg-[#25D366] hover:bg-[#1eb854] text-white font-syne font-semibold rounded-btn h-11"
+        className="w-full bg-[#25D366] hover:bg-[#1eb854] text-white font-syne font-bold rounded-btn h-11"
       >
         {sharing ? "Preparing..." : "Share to WhatsApp 📲"}
       </Button>
@@ -91,7 +89,7 @@ export function ResultHub({
       <Button
         onClick={onGenerateAnother}
         variant="outline"
-        className="w-full border-border text-text-secondary hover:text-text-primary rounded-btn h-10"
+        className="w-full border-[rgba(255,255,255,0.08)] text-warm-dim hover:text-text-primary rounded-btn h-10"
       >
         Generate Another
       </Button>

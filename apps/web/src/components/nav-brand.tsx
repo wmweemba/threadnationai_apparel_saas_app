@@ -5,8 +5,8 @@ import Link from "next/link"
 export function NavBrand() {
   return (
     <Link href="/dashboard?r=1">
-      <span className="font-syne font-bold text-xl text-text-primary whitespace-nowrap">
-        ThreadNation <span className="text-accent">AI</span>
+      <span className="font-syne font-extrabold text-xl text-cream whitespace-nowrap">
+        ThreadNation <span className="text-kente-gold">AI</span>
       </span>
     </Link>
   )

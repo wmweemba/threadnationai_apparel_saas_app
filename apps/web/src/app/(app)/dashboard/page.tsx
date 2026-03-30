@@ -123,10 +123,10 @@ export default function DashboardPage() {
 
       <div className="animate-fade-in max-w-2xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-syne font-bold text-text-primary mb-2">
+          <h1 className="text-3xl font-syne font-extrabold text-text-primary mb-2">
             {title}
           </h1>
-          <p className="text-text-secondary">{subtitle}</p>
+          <p className="text-warm-dim">{subtitle}</p>
         </div>
 
         {error && (
@@ -146,7 +146,7 @@ export default function DashboardPage() {
               <img
                 src={URL.createObjectURL(uploadedFile)}
                 alt="Uploaded garment"
-                className="w-full max-h-48 object-cover rounded-card border border-border"
+                className="w-full max-h-48 object-cover rounded-card border border-[rgba(255,255,255,0.08)]"
               />
             )}
             <StyleSelector
@@ -173,17 +173,17 @@ export default function DashboardPage() {
                 </div>
               </div>
               {result.criticFeedback && (
-                <p className="text-text-secondary text-sm">
+                <p className="text-warm-dim text-sm">
                   {result.criticFeedback}
                 </p>
               )}
             </div>
 
-            <div className="bg-surface-card rounded-card border border-border p-5 space-y-3">
-              <p className="font-syne font-semibold text-text-primary text-sm">
+            <div className="bg-surface-card rounded-card border border-[rgba(255,255,255,0.08)] p-5 space-y-3">
+              <p className="font-syne font-bold text-text-primary text-sm">
                 Tips for a better shot:
               </p>
-              <ul className="space-y-2 text-sm text-text-secondary">
+              <ul className="space-y-2 text-sm text-warm-dim">
                 {[
                   "Natural light from a window works best",
                   "Place the garment flat or hang it up",
@@ -191,7 +191,7 @@ export default function DashboardPage() {
                   "Ensure the full garment is in the frame",
                 ].map((tip) => (
                   <li key={tip} className="flex gap-2">
-                    <span className="text-accent">✦</span>
+                    <span className="text-kente-gold">✦</span>
                     {tip}
                   </li>
                 ))}
@@ -200,7 +200,7 @@ export default function DashboardPage() {
 
             <button
               onClick={reset}
-              className="w-full bg-accent hover:bg-accent/90 text-background font-syne font-semibold rounded-btn h-11 transition-colors"
+              className="w-full bg-kente-gold hover:bg-kente-gold/90 text-midnight font-syne font-bold rounded-btn h-11 transition-colors"
             >
               Retake Photo
             </button>

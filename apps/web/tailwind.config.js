@@ -9,49 +9,61 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#0D0D0D",
+        // ── Pan-African design tokens ──
+        midnight: "#0F0A04",
+        cream: "#FAF7F2",
+        "kente-gold": "#C9A84C",
+        chitenge: "#8B4513",
+        "kente-green": "#2D5016",
+        "ankara-blue": "#1B3A6B",
+        "warm-muted": "#6B5B3E",
+        "warm-dim": "#9A8A72",
+
+        // ── App semantic tokens ──
+        background: "#0F0A04",
         surface: {
-          card: "#1A1A1A",
-          elevated: "#242424",
+          card: "#1A1209",
+          elevated: "#241C10",
         },
         accent: {
           DEFAULT: "#C9A84C",
-          foreground: "#0D0D0D",
+          foreground: "#0F0A04",
         },
         text: {
           primary: "#F5F0E8",
-          secondary: "#8A8480",
+          secondary: "#9A8A72",
         },
         success: "#2D6A4F",
         error: "#8B2635",
-        border: "#2A2A2A",
-        // shadcn/ui semantic aliases
+        border: "#2A2111",
+
+        // ── shadcn/ui semantic aliases ──
         foreground: "#F5F0E8",
         card: {
-          DEFAULT: "#1A1A1A",
+          DEFAULT: "#1A1209",
           foreground: "#F5F0E8",
         },
         popover: {
-          DEFAULT: "#1A1A1A",
+          DEFAULT: "#1A1209",
           foreground: "#F5F0E8",
         },
         primary: {
           DEFAULT: "#C9A84C",
-          foreground: "#0D0D0D",
+          foreground: "#0F0A04",
         },
         secondary: {
-          DEFAULT: "#242424",
+          DEFAULT: "#241C10",
           foreground: "#F5F0E8",
         },
         muted: {
-          DEFAULT: "#1A1A1A",
-          foreground: "#8A8480",
+          DEFAULT: "#1A1209",
+          foreground: "#9A8A72",
         },
         destructive: {
           DEFAULT: "#8B2635",
           foreground: "#F5F0E8",
         },
-        input: "#2A2A2A",
+        input: "#2A2111",
         ring: "#C9A84C",
       },
       fontFamily: {
@@ -62,6 +74,7 @@ module.exports = {
         card: "12px",
         input: "8px",
         btn: "6px",
+        pill: "30px",
         lg: "12px",
         md: "8px",
         sm: "6px",

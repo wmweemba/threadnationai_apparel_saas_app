@@ -20,17 +20,19 @@ export function CreditBadge({ onTopUpClick }: CreditBadgeProps) {
     <button
       onClick={onTopUpClick}
       className={`
-        flex items-center gap-1.5 border rounded-btn px-3 py-1.5 transition-colors
+        flex items-center gap-2 rounded-btn px-3 py-1.5 transition-colors
         ${
           isLow
-            ? "bg-error/10 border-error/40 hover:border-error"
-            : "bg-surface-elevated border-border hover:border-accent"
+            ? "bg-error/10 hover:bg-error/15"
+            : "bg-[rgba(201,168,76,0.12)] hover:bg-[rgba(201,168,76,0.18)]"
         }
       `}
     >
-      <span className="text-accent text-sm">✦</span>
       <span
-        className={`text-sm font-medium ${isLow ? "text-error" : "text-text-secondary"}`}
+        className={`w-2 h-2 rounded-full ${isLow ? "bg-error" : "bg-kente-gold"}`}
+      />
+      <span
+        className={`text-sm font-medium ${isLow ? "text-error" : "text-kente-gold"}`}
       >
         {balance ?? "—"} credits
       </span>

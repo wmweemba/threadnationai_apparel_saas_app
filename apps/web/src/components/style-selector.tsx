@@ -54,8 +54,13 @@ export function StyleSelector({
             Great shot! {qualityScore}/100
           </span>
         </div>
-        <p className="text-text-secondary text-sm">Now choose your style.</p>
+        <p className="text-warm-dim text-sm">Now choose your style.</p>
       </div>
+
+      {/* Section label */}
+      <p className="text-warm-dim text-xs uppercase tracking-wider font-medium">
+        Style Presets
+      </p>
 
       {/* Preset cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -67,22 +72,26 @@ export function StyleSelector({
               rounded-card border p-5 text-left transition-all
               ${
                 selected === preset.id
-                  ? "border-accent bg-accent/10"
-                  : "border-border bg-surface-card hover:border-accent/50 hover:bg-surface-elevated"
+                  ? "border-kente-gold bg-[rgba(201,168,76,0.08)]"
+                  : "border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] hover:border-kente-gold/50 hover:bg-surface-elevated"
               }
             `}
           >
             <div className="text-3xl mb-3">{preset.icon}</div>
-            <p className="font-syne font-semibold text-text-primary mb-1">
+            <p
+              className={`font-syne font-bold mb-1 ${
+                selected === preset.id ? "text-kente-gold" : "text-text-primary"
+              }`}
+            >
               {preset.label}
             </p>
-            <p className="text-text-secondary text-xs leading-relaxed">
+            <p className="text-warm-dim text-xs leading-relaxed">
               {preset.description}
             </p>
             {selected === preset.id && (
               <div className="mt-3 flex items-center gap-1.5">
-                <span className="text-accent text-xs">✦</span>
-                <span className="text-accent text-xs font-medium">
+                <span className="text-kente-gold text-xs">✦</span>
+                <span className="text-kente-gold text-xs font-medium">
                   Selected
                 </span>
               </div>
@@ -94,7 +103,7 @@ export function StyleSelector({
       <Button
         onClick={onGenerate}
         disabled={!selected || generating}
-        className="w-full bg-accent hover:bg-accent/90 text-background font-syne font-semibold rounded-btn h-12 text-base"
+        className="w-full bg-kente-gold hover:bg-kente-gold/90 text-midnight font-syne font-bold rounded-btn h-12 text-base"
       >
         {generating ? "Starting..." : "Generate Now ✦"}
       </Button>

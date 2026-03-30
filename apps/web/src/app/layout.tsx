@@ -32,23 +32,23 @@ export default function RootLayout({
       appearance={{
         variables: {
           colorPrimary: "#C9A84C",
-          colorBackground: "#0D0D0D",
-          colorInputBackground: "#1A1A1A",
+          colorBackground: "#0F0A04",
+          colorInputBackground: "#1A1209",
           colorInputText: "#F5F0E8",
           colorText: "#F5F0E8",
-          colorTextSecondary: "#8A8480",
-          colorNeutral: "#2A2A2A",
+          colorTextSecondary: "#9A8A72",
+          colorNeutral: "#2A2111",
           borderRadius: "8px",
         },
         elements: {
-          card: "bg-surface-card border border-border shadow-none",
+          card: "bg-surface-card border border-[rgba(255,255,255,0.08)] shadow-none",
           headerTitle: "font-syne text-text-primary",
-          headerSubtitle: "text-text-secondary",
+          headerSubtitle: "text-warm-dim",
           formButtonPrimary:
-            "bg-accent text-accent-foreground hover:bg-accent/90 rounded-btn",
+            "bg-kente-gold text-midnight hover:bg-kente-gold/90 rounded-btn font-bold",
           formFieldInput:
-            "bg-surface-card border-border text-text-primary rounded-input",
-          footerActionLink: "text-accent hover:text-accent/80",
+            "bg-surface-card border-[rgba(255,255,255,0.08)] text-text-primary rounded-input",
+          footerActionLink: "text-kente-gold hover:text-kente-gold/80",
         },
       }}
     >

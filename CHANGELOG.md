@@ -7,7 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [0.5.0] — 2026-03-30
+
+### Added
+- `apps/web/src/components/kente-strip.tsx` — Pan-African kente-inspired horizontal strip component with 10 colour segments (gold, chitenge, midnight, green, blue) in a culturally-referencing repeating pattern; configurable height; used at top of landing page (8px) and bottom of app nav (4px)
+
+### Changed
+
+#### Design System — Pan-African Luxury Rebrand
+- `apps/web/tailwind.config.js` — replaced neutral grey token palette with warm Pan-African design tokens:
+  - New colours: `midnight` (`#0F0A04`), `cream` (`#FAF7F2`), `kente-gold` (`#C9A84C`), `chitenge` (`#8B4513`), `kente-green` (`#2D5016`), `ankara-blue` (`#1B3A6B`), `warm-muted` (`#6B5B3E`), `warm-dim` (`#9A8A72`)
+  - Updated semantic tokens: `background` → `#0F0A04`, `surface-card` → `#1A1209`, `surface-elevated` → `#241C10`, `border` → `#2A2111`, `text-secondary` → `#9A8A72`
+  - Added `rounded-pill` (30px) border radius for landing page CTA
+- `apps/web/src/app/globals.css` — updated all CSS custom properties to warm-tinted HSL values; added Syne weight 800 to Google Fonts import
+
+#### Landing Page — Light Theme
+- `apps/web/src/app/page.tsx` — complete redesign from redirect-only to a full marketing landing page:
+  - Cream (`#FAF7F2`) background with kente strip at top
+  - Hero: "Your fabric. Their eyes." headline (Syne 800, midnight text, gold accent)
+  - Eyebrow label: "Studio photos in 60 seconds" (kente-gold, uppercase, tracked)
+  - Pill-shaped CTA button (midnight bg, cream text) with kente-gold arrow circle
+  - Two stat cards (`#F0E6C8` fill): "60s / Photo to post" and "85% / Gross margin"
+  - Subtle kente grid pattern (repeating-linear-gradient at 8% gold opacity) at bottom
+  - Auth redirect preserved for logged-in users
+
+#### App Dashboard — Dark Theme Refinements
+- `apps/web/src/app/(app)/layout.tsx` — midnight background; kente strip (4px) at top of nav; warm-tinted border
+- `apps/web/src/components/nav-brand.tsx` — cream text with Syne 800 weight
+- `apps/web/src/components/credit-badge.tsx` — gold-tinted background (`rgba(201,168,76,0.12)`), solid kente-gold dot indicator replacing text symbol
+- `apps/web/src/components/upload-zone.tsx` — dashed gold border (`rgba(201,168,76,0.3)`), gold-tinted background, SVG upload icon in kente-gold
+- `apps/web/src/components/style-selector.tsx` — dark surface cards (`rgba(255,255,255,0.03)`), active card: kente-gold border + gold-tinted bg + gold label; uppercase tracked section labels in warm-dim; primary CTA: kente-gold bg with midnight text
+- `apps/web/src/components/progress-feed.tsx` — completed steps use kente-gold dots (replacing green), pending steps in warm-dim, warm-tinted card borders
+- `apps/web/src/components/caption-panel.tsx` — active caption card gets 3px solid kente-gold left border; tabs use kente-gold active state; uppercase tracked section header
+- `apps/web/src/components/preview-card.tsx` — midnight/cream badge, kente-gold approve button, warm-dim secondary text
+- `apps/web/src/components/result-hub.tsx` — updated to new token system; bold font weights
+- `apps/web/src/components/consent-gate.tsx` — kente-gold accents, warm-dim body text, Syne 800 headings, warm-tinted borders
+- `apps/web/src/components/mock-topup-modal.tsx` — kente-gold accents, warm-dim text, Syne 800 headings
+- `apps/web/src/app/(app)/dashboard/page.tsx` — all inline classes updated to new tokens (kente-gold, warm-dim, midnight, warm-tinted borders); Syne 800 page headings
+- `apps/web/src/app/(app)/history/page.tsx` — updated to new tokens: kente-gold links, warm-dim secondary text, warm-tinted card borders
+- `apps/web/src/app/layout.tsx` — Clerk appearance variables updated to midnight/gold palette (`colorBackground: #0F0A04`, `colorInputBackground: #1A1209`, `colorTextSecondary: #9A8A72`, `colorNeutral: #2A2111`)
+
+#### Typography
+- All headings upgraded from `font-bold` (700) to `font-extrabold` (800) across all components
+- All `font-semibold` button labels upgraded to `font-bold` for consistency
+- Section labels styled as uppercase + `tracking-wider` + `warm-dim` colour
 
 ---
 
@@ -218,7 +261,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.1.0...v0.2.0

@@ -23,7 +23,7 @@ function CopyButton({ text }: { text: string }) {
       onClick={copy}
       variant="outline"
       size="sm"
-      className="border-border text-text-secondary hover:text-text-primary hover:border-accent rounded-btn text-xs"
+      className="border-[rgba(255,255,255,0.08)] text-warm-dim hover:text-text-primary hover:border-kente-gold rounded-btn text-xs"
     >
       {copied ? "✓ Copied" : "Copy"}
     </Button>
@@ -31,6 +31,8 @@ function CopyButton({ text }: { text: string }) {
 }
 
 export function CaptionPanel({ socialContent }: CaptionPanelProps) {
+  const [activeTab, setActiveTab] = useState("sales");
+
   const tabs = [
     {
       id: "sales",
@@ -52,18 +54,18 @@ export function CaptionPanel({ socialContent }: CaptionPanelProps) {
   const allHashtags = socialContent.hashtags.join(" ");
 
   return (
-    <div className="bg-surface-card rounded-card border border-border p-5 space-y-4">
-      <h3 className="font-syne font-semibold text-text-primary">
+    <div className="bg-surface-card rounded-card border border-[rgba(255,255,255,0.08)] p-5 space-y-4">
+      <p className="text-warm-dim text-xs uppercase tracking-wider font-medium">
         Caption Options
-      </h3>
+      </p>
 
-      <Tabs defaultValue="sales">
-        <TabsList className="bg-surface-elevated border border-border rounded-btn p-1 w-full grid grid-cols-3 overflow-hidden">
+      <Tabs defaultValue="sales" onValueChange={setActiveTab}>
+        <TabsList className="bg-surface-elevated border border-[rgba(255,255,255,0.08)] rounded-btn p-1 w-full grid grid-cols-3 overflow-hidden">
           {tabs.map((tab) => (
             <TabsTrigger
               key={tab.id}
               value={tab.id}
-              className="text-xs rounded-btn data-[state=active]:bg-accent data-[state=active]:text-background text-text-secondary"
+              className="text-xs rounded-btn data-[state=active]:bg-kente-gold data-[state=active]:text-midnight text-warm-dim"
             >
               {tab.label}
             </TabsTrigger>
@@ -72,7 +74,13 @@ export function CaptionPanel({ socialContent }: CaptionPanelProps) {
 
         {tabs.map((tab) => (
           <TabsContent key={tab.id} value={tab.id} className="mt-4 space-y-3">
-            <div className="bg-surface-elevated rounded-card p-4 relative">
+            <div
+              className={`bg-surface-card rounded-card p-4 relative transition-all ${
+                activeTab === tab.id
+                  ? "border-l-[3px] border-l-kente-gold border-t border-r border-b border-[rgba(255,255,255,0.08)]"
+                  : "border border-[rgba(255,255,255,0.08)]"
+              }`}
+            >
               <p className="text-text-primary text-sm leading-relaxed pr-16">
                 {tab.caption}
               </p>
@@ -86,7 +94,7 @@ export function CaptionPanel({ socialContent }: CaptionPanelProps) {
 
       <div className="bg-surface-elevated rounded-card p-3">
         <div className="flex items-start justify-between gap-3">
-          <p className="text-text-secondary text-xs leading-relaxed flex-1">
+          <p className="text-warm-dim text-xs leading-relaxed flex-1">
             {allHashtags}
           </p>
           <CopyButton text={allHashtags} />

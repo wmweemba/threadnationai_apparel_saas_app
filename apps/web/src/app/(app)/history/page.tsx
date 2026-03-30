@@ -59,14 +59,14 @@ export default function HistoryPage() {
     <div className="animate-fade-in max-w-2xl mx-auto">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-syne font-bold text-text-primary mb-2">
+          <h1 className="text-3xl font-syne font-extrabold text-text-primary mb-2">
             Your History
           </h1>
-          <p className="text-text-secondary">Your last 5 generated posts.</p>
+          <p className="text-warm-dim">Your last 5 generated posts.</p>
         </div>
         <Link
           href="/dashboard"
-          className="text-sm text-accent hover:text-accent/80 transition-colors"
+          className="text-sm text-kente-gold hover:text-kente-gold/80 transition-colors"
         >
           + New Generation
         </Link>
@@ -87,13 +87,13 @@ export default function HistoryPage() {
       )}
 
       {!loading && !error && generations.length === 0 && (
-        <div className="border border-border rounded-card p-16 text-center bg-surface-card">
-          <p className="text-text-secondary text-sm mb-4">
+        <div className="border border-[rgba(255,255,255,0.08)] rounded-card p-16 text-center bg-surface-card">
+          <p className="text-warm-dim text-sm mb-4">
             No generations yet.
           </p>
           <Link
             href="/dashboard"
-            className="text-accent text-sm hover:text-accent/80 transition-colors"
+            className="text-kente-gold text-sm hover:text-kente-gold/80 transition-colors"
           >
             Create your first post →
           </Link>
@@ -107,7 +107,7 @@ export default function HistoryPage() {
             return (
               <div
                 key={gen.id}
-                className="bg-surface-card border border-border rounded-card p-4 flex gap-4 items-start"
+                className="bg-surface-card border border-[rgba(255,255,255,0.08)] rounded-card p-4 flex gap-4 items-start"
               >
                 {gen.previewUrl ? (
                   <div className="relative w-16 h-20 rounded-card overflow-hidden flex-shrink-0 bg-surface-elevated">
@@ -120,7 +120,7 @@ export default function HistoryPage() {
                   </div>
                 ) : (
                   <div className="w-16 h-20 rounded-card bg-surface-elevated flex-shrink-0 flex items-center justify-center">
-                    <span className="text-text-secondary text-xs">—</span>
+                    <span className="text-warm-dim text-xs">—</span>
                   </div>
                 )}
 
@@ -129,7 +129,7 @@ export default function HistoryPage() {
                     <Badge className={`text-xs border ${status.className}`}>
                       {status.label}
                     </Badge>
-                    <span className="text-text-secondary text-xs">
+                    <span className="text-warm-dim text-xs">
                       {PRESET_LABELS[gen.stylePreset] ?? gen.stylePreset}
                     </span>
                     {gen.approved && (
@@ -139,7 +139,7 @@ export default function HistoryPage() {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-3 text-xs text-text-secondary">
+                  <div className="flex items-center gap-3 text-xs text-warm-dim">
                     <span>Quality: {gen.inputQualityScore}/100</span>
                     <span>·</span>
                     <span>

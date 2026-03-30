@@ -11,7 +11,6 @@ interface UploadZoneProps {
 }
 
 export function UploadZone({ onFileSelected }: UploadZoneProps) {
-  // Two separate inputs: one for gallery (no capture), one for camera
   const galleryRef = useRef<HTMLInputElement>(null);
   const cameraRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -40,7 +39,6 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) processFile(file);
-      // Reset so selecting the same file again triggers onChange
       e.target.value = "";
     },
     [processFile]
@@ -76,7 +74,7 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
         <button
           type="button"
           onClick={() => galleryRef.current?.click()}
-          className="w-full text-center text-sm text-accent hover:text-accent/80 transition-colors py-1"
+          className="w-full text-center text-sm text-kente-gold hover:text-kente-gold/80 transition-colors py-1"
         >
           Change photo
         </button>
@@ -114,7 +112,7 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
       <button
         type="button"
         onClick={() => cameraRef.current?.click()}
-        className="w-full flex items-center justify-center gap-3 bg-accent hover:bg-accent/90 active:bg-accent/80 text-background font-syne font-semibold rounded-btn h-14 transition-colors text-base"
+        className="w-full flex items-center justify-center gap-3 bg-kente-gold hover:bg-kente-gold/90 active:bg-kente-gold/80 text-midnight font-syne font-bold rounded-btn h-14 transition-colors text-base"
       >
         <span className="text-xl">📷</span>
         Take a Photo
@@ -123,7 +121,7 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
       <button
         type="button"
         onClick={() => galleryRef.current?.click()}
-        className="w-full flex items-center justify-center gap-3 bg-surface-card hover:bg-surface-elevated active:bg-surface-elevated border border-border text-text-primary font-syne font-semibold rounded-btn h-14 transition-colors text-base"
+        className="w-full flex items-center justify-center gap-3 bg-surface-card hover:bg-surface-elevated active:bg-surface-elevated border border-[rgba(255,255,255,0.08)] text-text-primary font-syne font-bold rounded-btn h-14 transition-colors text-base"
       >
         <span className="text-xl">🖼️</span>
         Choose from Gallery
@@ -141,11 +139,30 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
         className={`
           hidden sm:flex cursor-pointer rounded-card border-2 border-dashed
           flex-col items-center justify-center p-10 transition-colors
-          ${dragOver ? "border-accent bg-surface-elevated" : "border-border bg-surface-card hover:bg-surface-elevated"}
+          ${
+            dragOver
+              ? "border-kente-gold bg-[rgba(201,168,76,0.08)]"
+              : "border-[rgba(201,168,76,0.3)] bg-[rgba(201,168,76,0.04)] hover:bg-[rgba(201,168,76,0.08)]"
+          }
         `}
       >
-        <p className="text-text-secondary text-sm text-center">
-          or drag and drop a photo here
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-kente-gold mb-3"
+        >
+          <path
+            d="M12 16V4m0 0L8 8m4-4l4 4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <p className="text-warm-dim text-sm text-center">
+          Drag and drop a photo here
           <br />
           <span className="text-xs">JPEG, PNG, WebP · max 10MB</span>
         </p>

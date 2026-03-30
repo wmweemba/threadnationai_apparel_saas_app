@@ -55,7 +55,7 @@ export function PreviewCard({
           onLoad={() => setImageLoaded(true)}
         />
         <div className="absolute top-3 left-3">
-          <span className="bg-black/60 text-white text-xs px-2 py-1 rounded-btn">
+          <span className="bg-midnight/80 text-cream text-xs px-2 py-1 rounded-btn">
             Preview
           </span>
         </div>
@@ -66,7 +66,7 @@ export function PreviewCard({
         <Button
           onClick={handleApprove}
           disabled={approving || rejecting}
-          className="bg-accent hover:bg-accent/90 text-background font-syne font-semibold rounded-btn h-11"
+          className="bg-kente-gold hover:bg-kente-gold/90 text-midnight font-syne font-bold rounded-btn h-11"
         >
           {approving ? "Unlocking..." : "Unlock Full Res ✦"}
         </Button>
@@ -74,7 +74,7 @@ export function PreviewCard({
           onClick={handleReject}
           disabled={rejecting || approving || !creditRefundEligible}
           variant="outline"
-          className="border-border text-text-secondary hover:text-text-primary hover:border-error rounded-btn h-11"
+          className="border-[rgba(255,255,255,0.08)] text-warm-dim hover:text-text-primary hover:border-error rounded-btn h-11"
         >
           {rejecting
             ? "Processing..."
@@ -85,7 +85,7 @@ export function PreviewCard({
       </div>
 
       {creditRefundEligible && (
-        <p className="text-center text-xs text-text-secondary">
+        <p className="text-center text-xs text-warm-dim">
           Rejecting refunds 0.5 credits · Max 3 rejections/hour
         </p>
       )}

@@ -12,7 +12,6 @@ const ALL_STEPS = [
   { step: 5, message: "Crafting high-converting captions..." },
 ];
 
-// Steps 3 and 4 involve the AI image generation — can take 30–90s on free tier
 const SLOW_STEPS = new Set([3, 4]);
 
 interface ProgressFeedProps {
@@ -24,7 +23,6 @@ export function ProgressFeed({ current }: ProgressFeedProps) {
   const percent = current?.percent ?? 0;
   const [elapsed, setElapsed] = useState(0);
 
-  // Reset elapsed timer whenever the active step changes
   useEffect(() => {
     setElapsed(0);
     if (!SLOW_STEPS.has(currentStep)) return;
@@ -36,14 +34,14 @@ export function ProgressFeed({ current }: ProgressFeedProps) {
   const slowHint = SLOW_STEPS.has(currentStep) && elapsed >= 15;
 
   return (
-    <div className="bg-surface-card rounded-card border border-border p-6 space-y-6 animate-fade-in">
+    <div className="bg-surface-card rounded-card border border-[rgba(255,255,255,0.08)] p-6 space-y-6 animate-fade-in">
       {/* Progress bar */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm mb-1">
-          <span className="text-text-secondary">
+          <span className="text-warm-dim">
             {current?.message ?? "Initialising..."}
           </span>
-          <span className="text-accent font-medium">{percent}%</span>
+          <span className="text-kente-gold font-medium">{percent}%</span>
         </div>
         <Progress value={percent} className="h-1.5 bg-surface-elevated" />
       </div>
@@ -60,9 +58,9 @@ export function ProgressFeed({ current }: ProgressFeedProps) {
               <div
                 className={`
                   w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-medium transition-all
-                  ${isDone ? "bg-success text-white" : ""}
-                  ${isActive ? "bg-accent text-background animate-pulse-gold" : ""}
-                  ${isPending ? "bg-surface-elevated text-text-secondary border border-border" : ""}
+                  ${isDone ? "bg-kente-gold text-midnight" : ""}
+                  ${isActive ? "bg-kente-gold text-midnight animate-pulse-gold" : ""}
+                  ${isPending ? "bg-surface-elevated text-warm-dim border border-[rgba(255,255,255,0.08)]" : ""}
                 `}
               >
                 {isDone ? "✓" : step}
@@ -70,16 +68,16 @@ export function ProgressFeed({ current }: ProgressFeedProps) {
               <span
                 className={`text-sm transition-colors ${
                   isDone
-                    ? "text-text-secondary line-through"
+                    ? "text-kente-gold"
                     : isActive
                     ? "text-text-primary font-medium"
-                    : "text-text-secondary"
+                    : "text-warm-dim"
                 }`}
               >
                 {message}
               </span>
               {isActive && (
-                <span className="ml-auto text-xs text-text-secondary animate-pulse">
+                <span className="ml-auto text-xs text-warm-dim animate-pulse">
                   {elapsed > 0 ? `${elapsed}s` : "..."}
                 </span>
               )}
@@ -88,19 +86,19 @@ export function ProgressFeed({ current }: ProgressFeedProps) {
         })}
       </div>
 
-      {/* Footer — updates when generation is taking a while */}
+      {/* Footer */}
       <div className="text-center space-y-1">
         {slowHint ? (
           <>
-            <p className="text-xs text-accent animate-pulse font-medium">
+            <p className="text-xs text-kente-gold animate-pulse font-medium">
               AI is working hard on your image...
             </p>
-            <p className="text-xs text-text-secondary">
+            <p className="text-xs text-warm-dim">
               Free tier can take up to 90 seconds · Please keep this tab open
             </p>
           </>
         ) : (
-          <p className="text-xs text-text-secondary">
+          <p className="text-xs text-warm-dim">
             ~45–90 seconds · Please keep this tab open
           </p>
         )}
