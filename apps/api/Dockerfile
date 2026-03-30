@@ -1,9 +1,6 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Build tools for sharp native compilation (fallback if prebuilt unavailable for this platform)
-RUN apk add --no-cache python3 make g++ vips-dev
-
 # Copy workspace manifests first — layer-caches npm install separately from source code
 COPY package*.json ./
 COPY packages/shared/package.json ./packages/shared/
