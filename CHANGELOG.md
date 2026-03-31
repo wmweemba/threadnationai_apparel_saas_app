@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.5.1] — 2026-03-31
+
+### Changed
+
+#### Mobile-First Responsive Pass (Session 4, Item 4)
+- `apps/web/src/app/(app)/layout.tsx` — tighter nav padding on mobile (`px-3 sm:px-4`), reduced main content top/bottom padding (`py-5 sm:py-8`)
+- `apps/web/src/components/nav-brand.tsx` — responsive font size (`text-base sm:text-xl`, was `text-xl` always) to prevent truncation at 375px
+- `apps/web/src/components/nav-actions.tsx` — reduced gap between nav items on mobile (`gap-2 sm:gap-4`); wrapped Clerk `UserButton` in `relative z-50` so popover renders above page content; added dark-themed popover styles (`userButtonPopoverCard`, `userButtonPopoverActionButton`, `userButtonPopoverActionButtonText`, `userButtonPopoverActionButtonIcon`, `userButtonPopoverFooter: hidden`) so the sign-out/manage-account dropdown is readable on dark background
+- `apps/web/src/components/credit-badge.tsx` — hides "credits" label on mobile (`hidden sm:inline`), showing only the number + dot; tighter horizontal padding (`px-2 sm:px-3`) to prevent two-line wrapping
+- `apps/web/src/app/layout.tsx` — added Clerk `userButtonPopover*` element overrides to global `ClerkProvider` appearance for consistent dark-themed dropdown across all pages
+- `apps/web/src/app/page.tsx` — landing page responsive typography: headline scaled down for mobile (`text-3xl sm:text-5xl md:text-6xl lg:text-7xl`, was `text-5xl` base which wrapped to 4+ lines on iPhone 13); reduced hero padding (`pt-16 sm:pt-24`, `pb-12 sm:pb-20`); subtext scaled (`text-base sm:text-lg md:text-xl`); stat card values scaled (`text-2xl sm:text-3xl`); stat section padding reduced (`pb-16 sm:pb-24`)
+- `apps/web/src/components/upload-zone.tsx` — camera and gallery buttons wrapped in `sm:hidden` container (mobile-only); desktop shows only drag-and-drop zone; drag-and-drop padding reduced (`p-8`, was `p-10`)
+- `apps/web/src/app/(app)/dashboard/page.tsx` — page heading scaled for mobile (`text-2xl sm:text-3xl`); tighter header margin (`mb-6 sm:mb-8`)
+
+### Fixed
+- **Nav overflow on iPhone 13** — brand text, credit badge, and user avatar no longer compete for horizontal space at 390px viewport; all three fit comfortably
+- **Clerk UserButton dropdown invisible** — popover was rendering with Clerk's default light theme on the dark app; now uses `#1A1209` background with `#F5F0E8` text; "Secured by Clerk" footer hidden
+- **Landing page headline wrapping** — "Your fabric. Their eyes." no longer wraps to 4+ lines on mobile; fits on 2 lines at 390px
+
+---
+
 ## [0.5.0] — 2026-03-30
 
 ### Added
@@ -261,7 +282,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/wmweemba/threadnationai_apparel_saas_app/compare/v0.2.0...v0.3.0

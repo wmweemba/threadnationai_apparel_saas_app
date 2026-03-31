@@ -20,7 +20,7 @@ export function CreditBadge({ onTopUpClick }: CreditBadgeProps) {
     <button
       onClick={onTopUpClick}
       className={`
-        flex items-center gap-2 rounded-btn px-3 py-1.5 transition-colors
+        flex items-center gap-1.5 sm:gap-2 rounded-btn px-2 sm:px-3 py-1.5 transition-colors
         ${
           isLow
             ? "bg-error/10 hover:bg-error/15"
@@ -34,7 +34,7 @@ export function CreditBadge({ onTopUpClick }: CreditBadgeProps) {
       <span
         className={`text-sm font-medium ${isLow ? "text-error" : "text-kente-gold"}`}
       >
-        {balance ?? "—"} credits
+        {balance ?? "—"}<span className="hidden sm:inline"> credits</span>
       </span>
     </button>
   );

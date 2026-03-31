@@ -122,8 +122,8 @@ export default function DashboardPage() {
       <MockTopupModal open={topupOpen} onClose={() => setTopupOpen(false)} />
 
       <div className="animate-fade-in max-w-2xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-syne font-extrabold text-text-primary mb-2">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-syne font-extrabold text-text-primary mb-2">
             {title}
           </h1>
           <p className="text-warm-dim">{subtitle}</p>

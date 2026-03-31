@@ -19,13 +19,13 @@ export default async function AppLayout({
     <div className="min-h-screen bg-midnight">
       <nav className="bg-midnight">
         <KenteStrip height="h-1" />
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 h-16 flex items-center justify-between">
           <NavBrand />
           <NavActions />
         </div>
         <div className="border-b border-[#2A2111]" />
       </nav>
-      <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
+      <main className="max-w-6xl mx-auto px-4 py-5 sm:py-8">{children}</main>
     </div>
   );
 }

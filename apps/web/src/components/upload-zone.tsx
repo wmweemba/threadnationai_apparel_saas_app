@@ -108,24 +108,26 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
         onChange={handleChange}
       />
 
-      {/* Primary mobile buttons */}
-      <button
-        type="button"
-        onClick={() => cameraRef.current?.click()}
-        className="w-full flex items-center justify-center gap-3 bg-kente-gold hover:bg-kente-gold/90 active:bg-kente-gold/80 text-midnight font-syne font-bold rounded-btn h-14 transition-colors text-base"
-      >
-        <span className="text-xl">📷</span>
-        Take a Photo
-      </button>
+      {/* Mobile-only buttons */}
+      <div className="sm:hidden space-y-3">
+        <button
+          type="button"
+          onClick={() => cameraRef.current?.click()}
+          className="w-full flex items-center justify-center gap-3 bg-kente-gold hover:bg-kente-gold/90 active:bg-kente-gold/80 text-midnight font-syne font-bold rounded-btn h-14 transition-colors text-base"
+        >
+          <span className="text-xl">📷</span>
+          Take a Photo
+        </button>
 
-      <button
-        type="button"
-        onClick={() => galleryRef.current?.click()}
-        className="w-full flex items-center justify-center gap-3 bg-surface-card hover:bg-surface-elevated active:bg-surface-elevated border border-[rgba(255,255,255,0.08)] text-text-primary font-syne font-bold rounded-btn h-14 transition-colors text-base"
-      >
-        <span className="text-xl">🖼️</span>
-        Choose from Gallery
-      </button>
+        <button
+          type="button"
+          onClick={() => galleryRef.current?.click()}
+          className="w-full flex items-center justify-center gap-3 bg-surface-card hover:bg-surface-elevated active:bg-surface-elevated border border-[rgba(255,255,255,0.08)] text-text-primary font-syne font-bold rounded-btn h-14 transition-colors text-base"
+        >
+          <span className="text-xl">🖼️</span>
+          Choose from Gallery
+        </button>
+      </div>
 
       {/* Desktop drag-and-drop zone */}
       <div
@@ -138,7 +140,7 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
         onClick={() => galleryRef.current?.click()}
         className={`
           hidden sm:flex cursor-pointer rounded-card border-2 border-dashed
-          flex-col items-center justify-center p-10 transition-colors
+          flex-col items-center justify-center p-8 transition-colors
           ${
             dragOver
               ? "border-kente-gold bg-[rgba(201,168,76,0.08)]"

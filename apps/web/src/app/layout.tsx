@@ -49,6 +49,13 @@ export default function RootLayout({
           formFieldInput:
             "bg-surface-card border-[rgba(255,255,255,0.08)] text-text-primary rounded-input",
           footerActionLink: "text-kente-gold hover:text-kente-gold/80",
+          userButtonPopoverCard:
+            "!bg-[#1A1209] !border !border-[rgba(255,255,255,0.12)] !shadow-2xl",
+          userButtonPopoverActionButton:
+            "!text-[#F5F0E8] hover:!bg-[#241C10]",
+          userButtonPopoverActionButtonText: "!text-[#F5F0E8]",
+          userButtonPopoverActionButtonIcon: "!text-[#9A8A72]",
+          userButtonPopoverFooter: "!hidden",
         },
       }}
     >

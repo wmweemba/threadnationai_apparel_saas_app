@@ -16,20 +16,20 @@ export default async function Home() {
       <KenteStrip height="h-2" />
 
       {/* Hero section */}
-      <div className="max-w-4xl mx-auto px-6 pt-24 pb-20 text-center">
+      <div className="max-w-4xl mx-auto px-6 pt-16 sm:pt-24 pb-12 sm:pb-20 text-center">
         {/* Eyebrow */}
         <p className="text-kente-gold text-xs font-sans font-medium uppercase tracking-[0.2em] mb-6">
           Studio photos in 60 seconds
         </p>
 
         {/* Headline */}
-        <h1 className="font-syne font-extrabold text-5xl sm:text-6xl md:text-7xl leading-[1.05] text-midnight mb-6">
+        <h1 className="font-syne font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-midnight mb-6">
           Your fabric.{" "}
           <span className="text-kente-gold">Their eyes.</span>
         </h1>
 
         {/* Subtext */}
-        <p className="text-warm-muted text-lg sm:text-xl max-w-xl mx-auto mb-10 leading-relaxed">
+        <p className="text-warm-muted text-base sm:text-lg md:text-xl max-w-xl mx-auto mb-10 leading-relaxed">
           Transform amateur product photos into professional social media posts
           — built for Zambian fashion boutiques.
         </p>
@@ -49,14 +49,14 @@ export default async function Home() {
       </div>
 
       {/* Stat cards */}
-      <div className="max-w-4xl mx-auto px-6 pb-24">
+      <div className="max-w-4xl mx-auto px-6 pb-16 sm:pb-24">
         <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
           <div className="flex-1 bg-[#F0E6C8] rounded-card px-6 py-5 text-center">
-            <p className="font-syne font-extrabold text-3xl text-[#7A5C1E] mb-1">60s</p>
+            <p className="font-syne font-extrabold text-2xl sm:text-3xl text-[#7A5C1E] mb-1">60s</p>
             <p className="text-[#7A5C1E] text-sm font-sans">Photo to post</p>
           </div>
           <div className="flex-1 bg-[#F0E6C8] rounded-card px-6 py-5 text-center">
-            <p className="font-syne font-extrabold text-3xl text-[#7A5C1E] mb-1">85%</p>
+            <p className="font-syne font-extrabold text-2xl sm:text-3xl text-[#7A5C1E] mb-1">85%</p>
             <p className="text-[#7A5C1E] text-sm font-sans">Gross margin</p>
           </div>
         </div>
